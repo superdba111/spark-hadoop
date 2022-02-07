@@ -43,6 +43,17 @@ optional arguments:
   -d DEVIATION, --deviation DEVIATION
                         standard deviation threshold. eg. 1
                         
+ ~/project/aws/DevOps/dba/gemini-api/testApi testApi ❯ ./apiAlerts.py --help
+2022-02-06 21:21:12, 143 - AlertingTool - INFO - Parsing args
+usage: apiAlerts.py [-h] [-c CURRENCY] [-d DEVIATION]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CURRENCY, --currency CURRENCY
+                        The currency trading pair, or ALL
+  -d DEVIATION, --deviation DEVIATION
+                        standard deviation threshold. eg. 1
+                        
 
 ~/project/aws/DevOps/dba/gemini-api/testApi testApi ❯ ./apiAlerts.py -c btcusd -d 1 | jq .
 {
