@@ -26,7 +26,8 @@ total 32
 ~/project/aws/DevOps/dba/gemini-api/testApi testApi ❯ python --version
 Python 3.8.5
 
-!!! please add "/Users/yli/project/aws/DevOps/dba/gemini-api/testApi/.venv/bin/python" by using which python on your first line
+!!! please add "/Users/yli/project/aws/DevOps/dba/gemini-api/testApi/.venv/bin/python" to your first line by using which python on your first line 
+"#!/Users/yli/project/aws/DevOps/dba/gemini-api/testApi/.venv/bin/python"
 then chmod +x apiAlerts.py or chmod 755 apiAlerts.py
 
 **************Running output---how to run it
