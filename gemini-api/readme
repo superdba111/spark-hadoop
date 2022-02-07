@@ -4,14 +4,14 @@ Generate an alert if the standard deviation from the hourly prices for past 24 h
 (or any indicated value if there’s a CLI parameter defined in the tool)
 
 *********Check env
-    $ python --version 3.8.5
-    $ pip install virtualenv
+~/project/aws/DevOps/dba/gemini-api/testApi ❯python --version 3.8.5
+~/project/aws/DevOps/dba/gemini-api/testApi ❯pip install virtualenv
 
 *********Using Mac
 
-    $ virtualenv .venv
-    $ source .venv/bin/activate
-    $ pip install aiohttp requests pylint
+~/project/aws/DevOps/dba/gemini-api/testApi ❯virtualenv .venv
+~/project/aws/DevOps/dba/gemini-api/testApi ❯source .venv/bin/activate
+~/project/aws/DevOps/dba/gemini-api/testApi ❯pip install aiohttp requests pylint
 
 *********Check env Output
 ~/project/aws/DevOps/dba/gemini-api/testApi ❯ pwd
@@ -88,9 +88,9 @@ We can use GUI on WEB and show graphic alerts color(Red/Yellow/Green) and visuli
 8. Documentation
 
 ***********Time
-45 mins to understand and retrive the similar sample codes from my local python git repos
-30 mins to modify the similar sample code I did before
-25 mins for documentation
+40 mins to understand the assignment and retrive the similar sample codes I did before from my local python git repos
+20 mins to modify the similar sample code I did before
+20 mins for documentation
 
 
 
