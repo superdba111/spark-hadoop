@@ -1,65 +1,92 @@
-##Goal
+********Goal
 
 Generate an alert if the standard deviation from the hourly prices for past 24 hours is more than 1 (or any indicated value if there’s a CLI parameter defined in the tool)
 
-Dependencies
---------------
-    $ python --version 3.8.10
+*********Check env
+    $ python --version 3.8.5
     $ pip install virtualenv
 
-Linux
-----------
+*********Using Mac
+
     $ virtualenv .venv
     $ source .venv/bin/activate
-
     $ pip install aiohttp requests pylint
 
-Windows
------------
-    $ virtualenv .venv
-    $ .venv\Scripts\activate
+*********Check env Output
+~/project/aws/DevOps/dba/gemini-api/testApi ❯ pwd
+/Users/yli/project/aws/DevOps/dba/gemini-api/testApi
+~/project/aws/DevOps/dba/gemini-api/testApi ❯ ls -lrt
+total 32
+-rwxr-xr-x  1 yli  staff   298 Feb  6 18:37 testhelp.py
+-rwxr-xr-x  1 yli  staff  4993 Feb  6 20:16 apiAlerts.py
+-rw-r--r--@ 1 yli  staff  1874 Feb  6 20:23 README.md
+~/project/aws/DevOps/dba/gemini-api/testApi testApi ❯ which python
+/Users/yli/project/aws/DevOps/dba/gemini-api/testApi/.venv/bin/python
+~/project/aws/DevOps/dba/gemini-api/testApi testApi ❯ python --version
+Python 3.8.5
 
-    $ pip install aiohttp requests pylint
+**************Running output---how to run it
+
+~/project/aws/DevOps/dba/gemini-api/testApi testApi ❯ ./apiAlerts.py -h
+2022-02-06 20:36:40, 143 - AlertingTool - INFO - Parsing args
+usage: apiAlerts.py [-h] [-c CURRENCY] [-d DEVIATION]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CURRENCY, --currency CURRENCY
+                        The currency trading pair, or ALL
+  -d DEVIATION, --deviation DEVIATION
+                        standard deviation threshold. eg. 1
+                        
+
+~/project/aws/DevOps/dba/gemini-api/testApi testApi ❯ ./apiAlerts.py -c btcusd -d 1 | jq .
+{
+  "timestamp": "2022-02-06T20:38:18.205180",
+  "level": "INFO",
+  "trading_pair": "btcusd",
+  "deviation": true,
+  "data": {
+    "last_price": 42471.02,
+    "average": "41664.06",
+    "change": "806.96",
+    "sdev": 3.6338168666857733
+  }
+}
 
 
-Usuage
-------------------
+~/project/aws/DevOps/dba/gemini-api/testApi testApi ❯ ./apiAlerts.py -c ethusd -d 1 | jq .
+{
+  "timestamp": "2022-02-06T20:39:08.325409",
+  "level": "INFO",
+  "trading_pair": "ethusd",
+  "deviation": true,
+  "data": {
+    "last_price": 3043.51,
+    "average": "3008.62",
+    "change": "34.89",
+    "sdev": 2.097406650881552
+  }
+}
 
-python api_alerts.py -c btcusd -d 1
 
-python api_alerts.py -c all -d 1
+********What you would do next to further improve it
+We can use GUI on WEB and show graphic alerts color(Red/Yellow/Green) and visulize the data
 
-python api_alerts.py -c ALL -d 2
 
-python api_alerts.py
+*********Your approach to solving the task, and any issues you faced with implementation
+1. Using requests library fetches the ticker data for btcusd (from https://api.gemini.com/v2/ticker/btcusd)
+2. Using statistics library calculates average, standard deviation, price deviation 
+3. Taking pair and deviation_limit as arguments to the function (more dynamic)
+4. Taking pair and deviation_limit from command line args (using argparse library)
+5. Validating the input currency (by using response of symbols endpoint https://api.gemini.com/v1/symbols)
+6. Fetching the data of each symbol from ticker endpoint when the currency is ALL,  
+7. Adding async tasks for each symbol using asyncio and aiohttp libraries
+8. Documentation
 
-api_alerts
-
-Next steps and Other interesting checks 
------------------------------------------
-
-We can implement pub sub model by monitoring the values and make this script as a publisher for different events
-
-Approach
------------------
-
-1. using requests library fetched the ticker data for btcusd from https://api.gemini.com/v2/ticker/btcusd
-2. calculated average, standard deviation, price deviation from the fields close, changes in json response using statistics library
-3. printed the result
-4. Improved by taking pair and deviation_limit as arguments to the function to make it more dynamic
-5. Improved by taking pair and deviation_limit from command line args using argparse library
-6. Validated the input currency by using response of symbols endpoint https://api.gemini.com/v1/symbols
-7. If currency is ALL, we have to fetch the data of each symbol from ticker endpoint. 
-8. Synchronous programming is taking time to fetch data of each symbol. So, improved it by adding async tasks for each symbol using asyncio and aiohttp libraries
-9. Documentation
-
-Time
---------------------
-1 and half hour to understand
-30 mins for design
-1 hour for implementation
-30 mins for improvement
-30 mins for documentation
+***********Time
+45 mins to understand and retrive the similar sample codes from my local python git repos
+30 mins to modify the similar sample code I did before
+25 mins for documentation
 
 
 
